@@ -1,8 +1,16 @@
 import {beforeAll, describe, expect, it} from "vitest";
-import {type IRoomRepository, RoomService} from "./room.service.js";
+import type {IRoomRepository, User} from "./room.type.js";
+import {RoomService} from "./room.service.js";
 
 describe("Room Service | unit", () => {
-
+    const adminUser: User = {
+        name: "admin",
+        isAdmin: true
+    }
+    const nonAdminUser: User = {
+        name: "non-admin",
+        isAdmin: false
+    }
     describe("list()", () => {
         describe("When repository is empty", () => {
             it("should exist and return an empty list", async () => {
@@ -12,7 +20,7 @@ describe("Room Service | unit", () => {
                     }
                 }
                 const roomService = new RoomService(roomRepository)
-                expect(await roomService.list()).toEqual([])
+                expect(await roomService.list(adminUser)).toEqual([])
             })
         })
         describe("When repository is not empty", () => {
@@ -28,7 +36,7 @@ describe("Room Service | unit", () => {
                     }
                 }
                 const roomService = new RoomService(roomRepository)
-                expect(await roomService.list()).toEqual(rooms)
+                expect(await roomService.list(adminUser)).toEqual(rooms)
             })
         })
 
@@ -49,13 +57,13 @@ describe("Room Service | unit", () => {
             describe("User is admin", () => {
                 it("should return an existing list", async () => {
                     const roomService = new RoomService(roomRepository)
-                    expect(await roomService.list()).toEqual(rooms)
+                    expect(await roomService.list(adminUser)).toEqual(rooms)
                 })
             })
             describe("User is not admin", () => {
                 it("should throw an error", async () => {
                     const roomService = new RoomService(roomRepository)
-                    expect(roomService.list()).rejects.toThrow(Error)
+                    await expect(roomService.list(nonAdminUser)).rejects.toThrow("User is not admin")
                 })
             })
         })
