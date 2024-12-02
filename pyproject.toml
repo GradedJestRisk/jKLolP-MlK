@@ -1,0 +1,10 @@
+[build-system]
+requires = ["setuptools", "setuptools_scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "deis_rolm"
+version = "0.0.1"
+dependencies = []
+
+[tool.setuptools_scm]
