@@ -6,7 +6,7 @@ const getRooms = (role, repository) => {
 }
 
 const updateRoomPrice = (basePrice, repository) => {
-    repository.updateFloorPrice({ firstFloorPrice: 100 });
+    repository.updateFloorPrice({ firstFloorPrice: 100, secondFloorPrice: 107 });
 }
 
 export {getRooms, updateRoomPrice};

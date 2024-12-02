@@ -2,8 +2,9 @@ import {expect} from 'chai';
 import * as service from "../../../src/application/service.js";
 
 class RoomRepositorySpy {
-    updateFloorPrice({ firstFloorPrice }) {
+    updateFloorPrice({ firstFloorPrice, secondFloorPrice }) {
         this.firstFloorPrice = firstFloorPrice;
+        this.secondFloorPrice = secondFloorPrice;
     }
 }
 
@@ -61,7 +62,18 @@ describe('#service', () => {
 
                 // then
                 expect(roomRepositorySpy.firstFloorPrice).equal(100);
-            })
+            });
+
+            it('should call roomRepository.updateFloorPrice with 107 as the second floor price ', () => {
+                // given
+                const roomRepositorySpy = new RoomRepositorySpy();
+
+                // when
+                service.updateRoomPrice(100, roomRepositorySpy);
+
+                // then
+                expect(roomRepositorySpy.secondFloorPrice).equal(107);
+            });
         });
     })
 });
