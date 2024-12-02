@@ -5,11 +5,12 @@ from room_repository_stub import RoomRepositoryStub
 
 
 def test_get_rooms():
-    service = Service(RoomRepositoryStub)
-
     # Given
+    room_repository_stub = RoomRepositoryStub(
+        data = [{"number": 1, "price": 50, "floor": 1}]
+    )
     role = "admin"
-    # What data?
+    service = Service(room_repository_stub)
 
     # When
     rooms = service.get_rooms(role)

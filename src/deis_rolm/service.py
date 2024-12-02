@@ -1,10 +1,9 @@
 from .room_repository_interface import RoomRepositoryInterface
-from .room_repository import RoomRepository
 
 
 class Service:
-    def __init__(self, room_repository_class: RoomRepositoryInterface = RoomRepository):
-        self.room_repository = room_repository_class()
+    def __init__(self, room_repository: RoomRepositoryInterface):
+        self.room_repository = room_repository
 
     def get_rooms(self, role: str):
         if role is "admin":
