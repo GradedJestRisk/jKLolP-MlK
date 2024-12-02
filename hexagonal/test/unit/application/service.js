@@ -1,6 +1,12 @@
 import {expect} from 'chai';
 import * as service from "../../../src/application/service.js";
 
+class RoomRepositorySpy {
+    updateFloorPrice({ firstFloorPrice }) {
+        this.firstFloorPrice = firstFloorPrice;
+    }
+}
+
 describe('#service', () => {
     describe('#getRooms', () => {
         describe('when the role is user', () => {
@@ -44,4 +50,18 @@ describe('#service', () => {
         });
     });
 
+    describe('#updateRoomPrice', () => {
+        describe('when the updated base price is 100', () => {
+            it('should call roomRepository.updateFloorPrice with 100 as the first floor price ', () => {
+                // given
+                const roomRepositorySpy = new RoomRepositorySpy();
+
+                // when
+                service.updateRoomPrice(100, roomRepositorySpy);
+
+                // then
+                expect(roomRepositorySpy.firstFloorPrice).equal(100);
+            })
+        });
+    })
 });
