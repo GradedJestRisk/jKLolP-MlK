@@ -1,5 +1,5 @@
 import {describe, expect, it} from "vitest";
-import {RoomRepository} from "./room.repository.js";
+import {RoomRepositoryInMemory} from "./room.repository.in-memory.js";
 import type {Room} from "../service/room.type.js";
 
 describe("Room Repository | unit", () => {
@@ -10,7 +10,7 @@ describe("Room Repository | unit", () => {
                 floor: 0,
                 price: 50
             }
-            const roomRepo = new RoomRepository()
+            const roomRepo = new RoomRepositoryInMemory()
             await roomRepo.add(aRoom)
 
             expect(await roomRepo.getAll()).toEqual([aRoom])
