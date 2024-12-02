@@ -1,0 +1,18 @@
+{
+  "type": "module",
+  "name": "jklolp-mlk",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite-node src/index.ts",
+    "build": "vite-node",
+    "test": "vitest"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@total-typescript/tsconfig": "^1.0.4",
+    "vitest": "^2.1.6"
+  }
+}
